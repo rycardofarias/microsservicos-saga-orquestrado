@@ -8,7 +8,7 @@ spring:
         start-saga: start-saga
         notify-ending: notify-ending
     consumer:
-      group-id: group_id
+      group-id: order-group
       auto-offset-reset: latest
 
   data:
