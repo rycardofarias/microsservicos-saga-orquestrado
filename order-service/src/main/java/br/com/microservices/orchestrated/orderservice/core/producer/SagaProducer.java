@@ -16,7 +16,7 @@ public class SagaProducer {
     @Value("${spring.kafka.topic.start-saga}")
     private String startSagaTopic;
 
-    private void sendEvent(String payload) {
+    public void sendEvent(String payload) {
         try{
             log.info("Sending event to topic {} with data {}", startSagaTopic, payload);
             kafkaTemplate.send(startSagaTopic, payload);
