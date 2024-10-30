@@ -1,5 +1,6 @@
 package br.com.microservices.orchestrated.orderservice.core.consumer;
 
+import br.com.microservices.orchestrated.orderservice.core.service.EventService;
 import br.com.microservices.orchestrated.orderservice.core.utils.JsonUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class EventConsumer {
 
+    private final EventService eventService;
     private final JsonUtil jsonUtil;;
 
     @KafkaListener(
@@ -22,6 +24,6 @@ public class EventConsumer {
     private void consumeNotifyEndingEvebt(String payload) {
         log.info("Receiving ending notification event {} from notify-send topic", payload);
         var event = jsonUtil.toEvent(payload);
-        log.info(event.toString());
+        eventService.notifyEvent(event);
     }
 }
