@@ -1,6 +1,6 @@
 package br.com.microservices.orchestrated.productvalidationservice.core.utils;
 
-import br.com.microservices.orchestrated.productvalidationservice.core.dto.Event;
+import br.com.microservices.orchestrated.productvalidationservice.core.dto.EventDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,9 +21,9 @@ public class JsonUtil {
             return "";
         }
     }
-    public Event toEvent(String json) {
+    public EventDto toEvent(String json) {
         try {
-            return objectMapper.readValue(json, Event.class);
+            return objectMapper.readValue(json, EventDto.class);
         } catch (Exception e) {
             log.error("Error converting json to object", e);
             return null;

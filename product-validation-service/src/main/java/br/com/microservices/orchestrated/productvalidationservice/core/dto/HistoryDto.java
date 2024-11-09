@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class History {
+public class HistoryDto {
 
     private String source;
     private ESagaStatus status;
