@@ -17,7 +17,7 @@ public class SagaOrchestratorConsumer {
             groupId = "${spring.kafka.consumer.group-id}",
             topics = "${spring.kafka.topic.start-saga}"
     )
-    private void consumeStartSagaEvent(String payload) {
+    public void consumeStartSagaEvent(String payload) {
         log.info("Receiving event {} from start-saga topic", payload);
         var event = jsonUtil.toEvent(payload);
         log.info(event.toString());
@@ -27,7 +27,7 @@ public class SagaOrchestratorConsumer {
             groupId = "${spring.kafka.consumer.group-id}",
             topics = "${spring.kafka.topic.orchestrator}"
     )
-    private void consumeOrchestratorEvent(String payload) {
+    public void consumeOrchestratorEvent(String payload) {
         log.info("Receiving event {} from orchestrator topic", payload);
         var event = jsonUtil.toEvent(payload);
         log.info(event.toString());
@@ -37,7 +37,7 @@ public class SagaOrchestratorConsumer {
             groupId = "${spring.kafka.consumer.group-id}",
             topics = "${spring.kafka.topic.finish-success}"
     )
-    private void consumeFinishSuccessEvent(String payload) {
+    public void consumeFinishSuccessEvent(String payload) {
         log.info("Receiving event {} from finish-success topic", payload);
         var event = jsonUtil.toEvent(payload);
         log.info(event.toString());
@@ -47,7 +47,7 @@ public class SagaOrchestratorConsumer {
             groupId = "${spring.kafka.consumer.group-id}",
             topics = "${spring.kafka.topic.finish-fail}"
     )
-    private void consumeFinishFailEvent(String payload) {
+    public void consumeFinishFailEvent(String payload) {
         log.info("Receiving event {} from finish-fail topic", payload);
         var event = jsonUtil.toEvent(payload);
         log.info(event.toString());

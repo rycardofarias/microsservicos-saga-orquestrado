@@ -17,7 +17,7 @@ public class PaymentConsumer {
             groupId = "${spring.kafka.consumer.group-id}",
             topics = "${spring.kafka.topic.payment-success}"
     )
-    private void consumeSuccessEvent(String payload) {
+    public void consumeSuccessEvent(String payload) {
         log.info("Receiving success event {} from payment-success topic", payload);
         var event = jsonUtil.toEvent(payload);
         log.info(event.toString());
@@ -27,7 +27,7 @@ public class PaymentConsumer {
             groupId = "${spring.kafka.consumer.group-id}",
             topics = "${spring.kafka.topic.payment-fail}"
     )
-    private void consumeFailEvent(String payload) {
+    public void consumeFailEvent(String payload) {
         log.info("Receiving rollback event {} from payment-fail topic", payload);
         var event = jsonUtil.toEvent(payload);
         log.info(event.toString());
