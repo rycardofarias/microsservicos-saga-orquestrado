@@ -44,7 +44,7 @@ public class ProductValidationService {
         kafkaProducer.sendEvent(jsonUtil.toJson(eventDto));
     }
 
-    public void validateProductsInformed(EventDto eventDto){
+    private void validateProductsInformed(EventDto eventDto){
 
         if (isEmpty(eventDto.getPayload().getProducts())
                 || isEmpty(eventDto.getPayload())){

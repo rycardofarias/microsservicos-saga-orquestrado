@@ -22,7 +22,7 @@ public class ProductValidationConsumer {
     private void consumeSuccessEvent(String payload) {
         log.info("Receiving success event {} from product-validation-success topic", payload);
         var event = jsonUtil.toEvent(payload);
-        productValidationService.validateProductsInformed(event);
+        productValidationService.validateExistingProducts(event);
     }
 
     @KafkaListener(
