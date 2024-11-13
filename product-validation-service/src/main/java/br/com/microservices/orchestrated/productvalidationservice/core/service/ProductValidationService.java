@@ -60,16 +60,17 @@ public class ProductValidationService {
     private void checkCurrentValidation(EventDto eventDto){
 
         validateProductsInformed(eventDto);
-        if (validationRepository.existsByOrderIdAndTransactionId(eventDto.getOrderId(),
-                eventDto.getTransactionId())){
-            throw new RuntimeException("There's another transactionId for this validation");
+        if (validationRepository.existsByOrderIdAndTransactionId(
+                eventDto.getOrderId(), eventDto.getTransactionId())) {
+            throw new ValidationException("There's another transactionId for this validation.");
         }
-        eventDto.getPayload().getProducts().forEach(productDto -> {
-            validateProductInformad(productDto);
+        eventDto.getPayload().getProducts().forEach(product -> {
+            validateProductInformed(product);
+            validateExistingProduct(product.getProduct().getCode());
         });
     }
 
-    private void validateProductInformad(OrderProductsDto productDto){
+    private void validateProductInformed(OrderProductsDto productDto){
         if (isEmpty(productDto.getProduct())
                 || isEmpty(productDto.getProduct().getCode())){
             throw new RuntimeException("Product must be informed");
@@ -87,14 +88,14 @@ public class ProductValidationService {
                 .builder()
                 .orderId(eventDto.getPayload().getId())
                 .transactionId(eventDto.getTransactionId())
-                .sucess(success)
+                .success(success)
                 .build();
 
         validationRepository.save(validation);
     }
 
     private void handleSuccess(EventDto eventDto){
-        eventDto.setStatus(SUCESSO);
+        eventDto.setStatus(SUCCESS);
         eventDto.setSource(CURRENT_SOURCE);
         addHistory(eventDto, "Products are validated successfully!");
     }
@@ -128,11 +129,11 @@ public class ProductValidationService {
 
     private void changeValidationToFail(EventDto eventDto) {
         validationRepository
-                .findByOrderIdAndTransactionId(eventDto.getOrderId(),
-                        eventDto.getTransactionId())
+                .findByOrderIdAndTransactionId(eventDto.getOrderId(), eventDto.getTransactionId())
                 .ifPresentOrElse(validation -> {
-                    validation.setSucess(false);
-                    validationRepository.save(validation);
-                }, () -> createValidation(eventDto, false));
+                            validation.setSuccess(false);
+                            validationRepository.save(validation);
+                        },
+                        () -> createValidation(eventDto, false));
     }
 }

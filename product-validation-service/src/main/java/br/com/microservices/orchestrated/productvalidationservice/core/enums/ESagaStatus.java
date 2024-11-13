@@ -1,7 +1,7 @@
 package br.com.microservices.orchestrated.productvalidationservice.core.enums;
 
 public enum ESagaStatus {
-    SUCESSO,
+    SUCCESS,
     ROLLBACK_PENDING,
     FAIL;
 }

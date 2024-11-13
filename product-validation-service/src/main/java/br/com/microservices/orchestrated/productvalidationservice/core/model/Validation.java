@@ -27,7 +27,7 @@ public class Validation {
     private String transactionId;
 
     @Column(nullable = false)
-    private boolean sucess;
+    private boolean success;
 
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
