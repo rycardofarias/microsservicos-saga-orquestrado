@@ -36,9 +36,6 @@ public class Payment {
     @Enumerated(EnumType.STRING)
     private EPaymentStatus status;
 
-    @Column(nullable = false)
-    private boolean success;
-
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
