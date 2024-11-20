@@ -1,7 +1,7 @@
 package br.com.microservices.orchestrated.inventoryservice.core.enums;
 
 public enum ESagaStatus {
-    SUCESSO,
+    SUCCESS,
     ROLLBACK_PENDInG,
     FAIL;
 }

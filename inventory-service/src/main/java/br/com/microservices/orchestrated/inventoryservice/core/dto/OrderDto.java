@@ -1,6 +1,5 @@
 package br.com.microservices.orchestrated.inventoryservice.core.dto;
 
-import br.com.microservices.orchestrated.inventoryservice.core.enums.ESagaStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,14 +12,13 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Event {
+public class OrderDto {
 
     private String id;
-    private String transactionId;
-    private String orderId;
-    private Order payload;
-    private String source;
-    private ESagaStatus status;
-    private List<History> eventHistory;
+    private List<OrderProductsDto> products;
     private LocalDateTime createdAt;
+    private String transactionId;
+    private double totalAmount;
+    private int totalItems;
+
 }
